@@ -7,11 +7,13 @@ public class Target : MonoBehaviour
 {
     public BoxCollider area;
 
+    public GameManager gameM;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        // gameM.NonStaticInstance
     }
 
     // Update is called once per frame
@@ -24,10 +26,13 @@ public class Target : MonoBehaviour
     {
         var foodStuff = collision.gameObject.GetComponent<XRGrabInteractable>();
 
-        if(foodStuff != null)
+        if(foodStuff != null && GameManager)
         {
             Destroy(collision.gameObject);
             ChangeRandomPosition();
+
+            GameManager.Instance.AddScore();
+            GameManager.Instance.SpawnFoodItem();
         }
     }
 
